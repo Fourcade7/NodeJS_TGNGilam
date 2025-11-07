@@ -58,13 +58,13 @@ async function getLastRetaildemand(bot) {
            console.log(sum)
            console.log(payedSum)
            console.log(debt)
-           lastRetaildemandId=retailDemandId
+           
 
            let msgToAdmin=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: ${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${payedSum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            let msgToUser=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: ${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${payedSum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            infoToAdmin(bot,msgToAdmin);
            infoToUser(bot,agentPhone,msgToUser);
-           
+           lastRetaildemandId=retailDemandId
         }else{
           console.log("another id")
         }
@@ -121,13 +121,13 @@ async function getLastPaymentin(bot) {
            console.log(sum)
            
            console.log(debt)
-           lastRetaildemandId=retailDemandId
+           
 
            let msgToAdmin=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${sum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            let msgToUser=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${sum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            infoToAdmin(bot,msgToAdmin);
            infoToUser(bot,agentPhone,msgToUser);
-           
+           lastPaymentId=paymentId
         }else{
           console.log("another id")
         }
