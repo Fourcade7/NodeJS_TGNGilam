@@ -126,7 +126,7 @@ async function getLastPaymentin(bot) {
            let msgToAdmin=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${sum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            let msgToUser=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${sum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            //infoToAdmin(bot,msgToAdmin);
-           //infoToUser(bot,agentPhone,msgToUser);
+           infoToUser(bot,agentPhone,msgToUser);
            lastPaymentId=paymentId
         }else{
           console.log("another id")
