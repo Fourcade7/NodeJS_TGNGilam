@@ -175,12 +175,14 @@ function checkPhoneNumber(bot){
 
 async function buttonInfoToUser(bot,phone,message){
 
-  let users = [];
-  if (fs.existsSync(USERS_FILE)) {
-    users = JSON.parse(fs.readFileSync(USERS_FILE, "utf-8"));
-  }
+  
 
   bot.on('message', (msg) => {
+    let users = [];
+      if (fs.existsSync(USERS_FILE)) {
+        users = JSON.parse(fs.readFileSync(USERS_FILE, "utf-8"));
+      }
+
     const text = msg.text;
     const chatId = msg.chat.id;
     const checkUser = users.find((u) => u.chatId === chatId);
