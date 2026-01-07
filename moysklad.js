@@ -26,7 +26,7 @@ async function getLastRetaildemand(bot) {
          //"X-API-Key": "392b523f48da5ed49425d6d874517483"
          //"Authorization": "Bearer  995539205df3e4ffa965f744af89ae1e7851b1b0"
          //"Authorization": "Bearer  ef89f7033a291007f08df842eb0772b219d29247"
-         "Authorization": "Bearer  1fcfe68359bd072ef37e73074046c5f132ea3b3e"
+         "Authorization": "Bearer  c28e28a168c061c53d6864b17fddc5dbc4e62ca9"
         }
       });      // GET request
       const data = await response.json(); 
@@ -34,7 +34,7 @@ async function getLastRetaildemand(bot) {
         let products="";
         const aslist = data.rows[0].positions.rows;
         aslist.forEach((element,index) => {
-          products=products+(index+1)+". 🟢 "+element.assortment.name+" 💸 "+element.quantity+"x = "+(element.quantity*element.price/100)+" UZS \n";
+          products=products+(index+1)+". 🟢 "+element.assortment.name+" 💸 "+element.quantity+"x = $"+(element.quantity*element.price/100)+" \n";
         });
         const retailDemandId = data.rows[0].id;
         const retailName = data.rows[0].name;
@@ -60,9 +60,9 @@ async function getLastRetaildemand(bot) {
            console.log(debt)
            
 
-           let msgToAdmin=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: ${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${payedSum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
-           let msgToUser=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: ${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${payedSum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
-           infoToAdmin(bot,msgToAdmin);
+           let msgToAdmin=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: $${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${payedSum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
+           let msgToUser=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: $${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${payedSum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
+           //infoToAdmin(bot,msgToAdmin);
            infoToUser(bot,agentPhone,msgToUser);
            lastRetaildemandId=retailDemandId
         }else{
@@ -76,7 +76,7 @@ async function getLastRetaildemand(bot) {
       }
       
     } catch (err) {
-      console.error("Xato:", err.message);
+      console.error("Xato:xxx", err.message);
     }
 }
 
@@ -91,7 +91,7 @@ async function getLastPaymentin(bot) {
          //"X-API-Key": "392b523f48da5ed49425d6d874517483"
          //"Authorization": "Bearer  995539205df3e4ffa965f744af89ae1e7851b1b0"
          //"Authorization": "Bearer  ef89f7033a291007f08df842eb0772b219d29247"
-         "Authorization": "Bearer  1fcfe68359bd072ef37e73074046c5f132ea3b3e"
+         "Authorization": "Bearer  c28e28a168c061c53d6864b17fddc5dbc4e62ca9"
         }
       });      // GET request
       const data = await response.json(); 
@@ -125,8 +125,8 @@ async function getLastPaymentin(bot) {
 
            let msgToAdmin=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${sum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
            let msgToUser=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: ${sum}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
-           infoToAdmin(bot,msgToAdmin);
-           infoToUser(bot,agentPhone,msgToUser);
+           //infoToAdmin(bot,msgToAdmin);
+           //infoToUser(bot,agentPhone,msgToUser);
            lastPaymentId=paymentId
         }else{
           console.log("another id")
@@ -144,6 +144,52 @@ async function getLastPaymentin(bot) {
 }
 
 
+//Отчет Показатели контрагентов
+async function getLastBalanceCustomer(bot,phone) {
+  try {
+   
+    const response = await fetch(`https://api.moysklad.ru/api/remap/1.2/report/counterparty?filter=counterparty.phone=%2B${phone}`,{
+      method:"GET",
+      headers:{
+       //"X-API-Key": "392b523f48da5ed49425d6d874517483"
+       //"Authorization": "Bearer  995539205df3e4ffa965f744af89ae1e7851b1b0"
+       //"Authorization": "Bearer  ef89f7033a291007f08df842eb0772b219d29247"
+       "Authorization": "Bearer  c28e28a168c061c53d6864b17fddc5dbc4e62ca9"
+      }
+    });      // GET request
+    const data = await response.json(); 
+    if(data?.rows.length>0){
 
-export  {getLastRetaildemand,getLastPaymentin};
+      
+      
+      
+      const demandsSum = data.rows[0].demandsSum/100;
+      const debt = Math.abs(data.rows[0].balance/100);
+      const agentName = data.rows[0].counterparty.name;
+      const agentPhone = data.rows[0].counterparty.phone;
+      console.log(demandsSum);
+      console.log(debt);
+
+      let msgToUser=`ℹ️ Информация: \n💵 Общая цена покупки: $${demandsSum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${demandsSum-debt}\n${debt>0 ? "🔴":"🟢"} Долг: ${debt}`
+      //infoToAdmin(bot,msgToAdmin);
+      infoToUser(bot,agentPhone,msgToUser);
+
+
+
+      
+      
+    
+    
+    }else{
+      console.log("data null")
+    }
+    
+  } catch (err) {
+    console.error("Xato:xxx", err.message);
+  }
+}
+
+
+
+export  {getLastRetaildemand,getLastPaymentin,getLastBalanceCustomer};
 
