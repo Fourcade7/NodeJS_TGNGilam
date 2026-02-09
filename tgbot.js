@@ -98,8 +98,8 @@ function tgContacts(bot){
 }
 
 
-function infoToAdmin(bot,message){
-  bot.sendMessage(6080018622,`${message}`,{
+function infoToAdmin(bot,message,chatId){
+  bot.sendMessage(chatId,`${message}`,{
     reply_markup: {
       remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
     }

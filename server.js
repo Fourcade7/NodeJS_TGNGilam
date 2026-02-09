@@ -2,7 +2,7 @@ import express from "express"
 
 import TelegramBot from "node-telegram-bot-api";
 
-const token = "8584583825:AAEqCWmO2Z1pNCL-0NfkK5tVRtjBSbp_hjU";
+const token = "8455672387:AAHR4pmsmhnb8VzIUBtqP3nQEa3k23xSY9c";
 const bot = new TelegramBot(token, { polling: true });
 bot.on("polling_error", (err) => console.error("Polling error:", err));
 bot.on("error", (err) => console.error("General error:", err));
