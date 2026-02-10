@@ -98,7 +98,7 @@ function tgContacts(bot){
 }
 
 
-function infoToAdmin(bot,message,chatId){
+async function infoToAdmin(bot,message,chatId){
   bot.sendMessage(chatId,`${message}`,{
     reply_markup: {
       remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
@@ -106,7 +106,7 @@ function infoToAdmin(bot,message,chatId){
   });
 }
 
-function infoToUser(bot,phone,message){
+async function infoToUser(bot,phone,message){
    // Faylni o‘qish
   let users = [];
   if (fs.existsSync(USERS_FILE)) {
