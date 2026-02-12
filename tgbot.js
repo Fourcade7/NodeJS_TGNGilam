@@ -85,12 +85,12 @@ function tgContacts(bot){
   
   bot.sendMessage(chatId,`✅ Спасибо ${name}, я сейчас отправлю вам информацию ${chatId}`,{
     reply_markup: {
-      remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
+      //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
     }
   });
   bot.sendMessage(6080018622,`👏 Добавлен новый пользователь \n\n🙋🏻‍♂️${name} \n✍🏼${msg.chat.username} \n📞${phoneNumber}`,{
     reply_markup: {
-      remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
+      //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
     }
   });
 });
@@ -101,7 +101,7 @@ function tgContacts(bot){
 async function infoToAdmin(bot,message,chatId){
   bot.sendMessage(chatId,`${message}`,{
     reply_markup: {
-      remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
+      //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
     }
   });
 }
