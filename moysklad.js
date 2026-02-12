@@ -189,8 +189,8 @@ async function getLastPaymentin(bot) {
            console.log(debt)
            
 
-           let msgToAdmin=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${sum}\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}`
-           let msgToUser=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: ${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${sum}\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}`
+           let msgToAdmin=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: $${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${sum}` //\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}
+           let msgToUser=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n💵 Общая цена покупки: $${salesAmount}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${sum}` //\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}
            infoToAdmin(bot,msgToAdmin,6080018622);
            infoToAdmin(bot,msgToAdmin,113995828);
            infoToUser(bot,agentPhone,msgToUser);
