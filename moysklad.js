@@ -99,7 +99,7 @@ async function getLastRetaildemand(bot) {
       let products="";
       const aslist = data.rows[0].positions.rows;
       aslist.forEach((element,index) => {
-        products=products+(index+1)+". 🟢 "+element.assortment.name+" 💸 "+element.quantity+"x = $"+(element.quantity*element.price/100)+" \n";
+        products=products+(index+1)+". 🟢 "+element.assortment.name+" $"+(element.price/100)+" x "+element.quantity+" = $"+(element.quantity*element.price/100)+" \n";
       });
       const retailDemandId = data.rows[0].id;
       const retailName = data.rows[0].name;
