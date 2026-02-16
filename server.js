@@ -27,7 +27,7 @@ function myJob() {
   console.log("every 5 second ");
 }
 
-setInterval(myJob, 5000);
+setInterval(myJob, 6000);
 
 
 

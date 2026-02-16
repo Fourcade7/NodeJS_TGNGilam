@@ -98,37 +98,64 @@ function tgContacts(bot){
 }
 
 
-async function infoToAdmin(bot,message,chatId){
-  bot.sendMessage(chatId,`${message}`,{
-    reply_markup: {
-      //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
-    }
-  });
+// async function infoToAdmin(bot,message,chatId){
+//   bot.sendMessage(chatId,`${message}`,{
+//     reply_markup: {
+//       //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
+//     }
+//   });
+// }
+
+async function infoToAdmin(bot, message, chatId) {
+  try {
+   bot.sendMessage(chatId, `${message}`);
+  } catch (err) {
+    console.log("❌ Admin ga yuborilmadi:", chatId, err.response?.body);
+  }
 }
 
-async function infoToUser(bot,phone,message){
-   // Faylni o‘qish
+async function infoToUser(bot, phone, message) {
   let users = [];
   if (fs.existsSync(USERS_FILE)) {
     users = JSON.parse(fs.readFileSync(USERS_FILE, "utf-8"));
   }
-  // Foydalanuvchi mavjudligini tekshirish
+
   const checkUser = users.find((u) => u.phoneNumber === phone);
+  
 
-  
-  
-  // Agar mavjud bo‘lmasa, qo‘shamiz
   if (checkUser) {
-    console.log(checkUser.chatId);
-    bot.sendMessage(checkUser.chatId,`${message}`,{
-    reply_markup: {
-      //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
+    try {
+      bot.sendMessage(checkUser.chatId, `${message}`);
+    } catch (err) {
+      console.log("❌ Userga yuborilmadi:", checkUser.chatId, err.response?.body);
     }
-   });
   }
+}
+
+
+// async function infoToUser(bot,phone,message){
+//    // Faylni o‘qish
+//   let users = [];
+//   if (fs.existsSync(USERS_FILE)) {
+//     users = JSON.parse(fs.readFileSync(USERS_FILE, "utf-8"));
+//   }
+//   // Foydalanuvchi mavjudligini tekshirish
+//   const checkUser = users.find((u) => u.phoneNumber === phone);
 
   
-}
+  
+//   // Agar mavjud bo‘lmasa, qo‘shamiz
+//   if (checkUser) {
+//     console.log(checkUser.chatId);
+//     bot.sendMessage(checkUser.chatId,`${message}`,{
+//     reply_markup: {
+//       //remove_keyboard: true, // 👈 Shu joy klaviaturani butunlay yo‘q qiladi
+//     }
+//    });
+//   }
+
+  
+// }
 
 
 

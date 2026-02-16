@@ -124,13 +124,14 @@ async function getLastRetaildemand(bot) {
          console.log(payedSum)
          console.log(debt)
          
+         lastRetaildemandId=retailDemandId
 
          let msgToAdmin=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: $${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${payedSum}\n${debt>0 ? "🔴":"🟢"} Итого долг: $${debt}`
          let msgToUser=`✅ Новая Отгрузка №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n📦 Список товаров: \n${products} \n💵 Общая цена покупки: $${sum}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${payedSum}\n${debt>0 ? "🔴":"🟢"} Иитого долг: $${debt}`
-        infoToAdmin(bot,msgToAdmin,6080018622);
-        infoToAdmin(bot,msgToAdmin,113995828);
-         infoToUser(bot,agentPhone,msgToUser);
-         lastRetaildemandId=retailDemandId
+         await infoToAdmin(bot,msgToAdmin,6080018622);
+         await infoToAdmin(bot,msgToAdmin,113995828);
+         await infoToUser(bot,agentPhone,msgToUser);
+         
       }else{
         console.log("another id")
       }
@@ -188,16 +189,21 @@ async function getLastPaymentin(bot) {
            
            console.log(debt)
            
+           lastPaymentId=paymentId
 
            let msgToAdmin=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${sum}` //\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}.  //💵 Общая цена покупки: $${salesAmount}\n
            let msgToUser=`✅ Новая Платежи №: ${retailName}\n🧔🏻‍♂️ Кассир: ${ownerName} \n🕓 ${getCurrentFormattedDateAndTime()}\n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n☑️ Оплачено: $${sum}` //\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}.  //💵 Общая цена покупки: $${salesAmount}\n
-           infoToAdmin(bot,msgToAdmin,6080018622);
-           infoToAdmin(bot,msgToAdmin,113995828);
-           infoToUser(bot,agentPhone,msgToUser);
+           await infoToAdmin(bot,msgToAdmin,6080018622);
+           await infoToAdmin(bot,msgToAdmin,113995828);
+           //await infoToUser(bot,agentPhone,msgToUser);
+           if (agentPhone) {
+              await infoToUser(bot,agentPhone,msgToUser);
+           }
+
            
            const phoneNumber2 =agentPhone.substring(1);
            getLastBalanceCustomer(bot, phoneNumber2);
-           lastPaymentId=paymentId
+           
         }else{
           console.log("another id")
         }
@@ -243,7 +249,7 @@ async function getLastBalanceCustomer(bot,phone) {
       
       let msgToUser=`ℹ️ Информация: \n\n🙆🏻‍♂️ Контрагент: ${agentName}\n📱: ${agentPhone}\n\n${debt>0 ? "🔴":"🟢"} Долг: $${debt}`; //💵 Общая цена покупки: $${demandsSum}\n
       
-      infoToUser(bot,agentPhone,msgToUser);
+      await infoToUser(bot,agentPhone,msgToUser);
 
 
 
